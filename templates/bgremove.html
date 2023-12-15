@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Removal Tool</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+        }
+
+        .result-container {
+            margin-top: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center mb-4 mt-2">Background Removal Tool</h1>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="text-left" for="file">Choose an image...</label>
+                        <input type="file" class="form-control-file" id="file" name="file" accept=".png, .jpg, .jpeg" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Remove Background</button>
+                </form>
+                
+                {% if error_message %}
+                    <div class="alert alert-danger mt-3" role="alert">
+                        {{ error_message }}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="col-md-12 result-container">
+                {% if result_image %}
+                    <a href="{{ url_for('download') }}" class="btn btn-success mt-3">Download Image</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

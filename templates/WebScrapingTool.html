@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Web Scraping Tool</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    
+        .container {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+        }
+    
+        .result-container {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: scroll;            
+
+        }
+        
+    </style>
+</head>
+<body class="bg-light">
+    <main class="container">
+        <div class="text-center">
+            <h1 class="mb-4">Web Scraping Tool</h1>
+            <form method="post">
+                <div class="form-group">
+                    <label for="website_url">Enter the URL to scrape:</label>
+                    <input type="text" class="form-control" id="website_url" name="website_url" required>
+                </div>
+                <div class="form-group">
+                    <label for="scrape_option">Select what to scrape:</label>
+                    <select class="form-control" id="scrape_option" name="scrape_option" required>
+                        <option value="data">Data</option>
+                        <option value="links">Links</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Scrape</button>
+            </form>
+            {% if result %}
+                <div class="result-container">
+                    <h3>Scraped Result</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                {% for key in result[0].keys() %}
+                                    <th scope="col">{{ key }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in result %}
+                                <tr>
+                                    {% for value in item.values() %}
+                                        <td>{{ value }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

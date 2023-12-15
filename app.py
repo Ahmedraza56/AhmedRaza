@@ -1,14 +1,16 @@
 from flask import Flask, render_template, request
 
+from test import test_app
+
+
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
-    if request.method == 'POST':
-        # Form se data nikalo
-        user_name = request.form['user_name']
-        return render_template('index.html', user_name=user_name)
     return render_template('index.html')
 
-if __name__ == '_main_':
-    app.run(debug=True)
+app.register_blueprint(test_app, url_prefix='/test')
+
+
+if __name__ == '__main__':
+    app.run(port=8002,debug=True)

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+        }
+    </style>
+    <title>Text Detector</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Text Detector</h1>
+
+        <form method="post">
+            <div class="form-group">
+                <label for="user_input">Enter text:</label>
+                <textarea class="form-control" id="user_input" name="user_input" rows="4">{{ user_input }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Check</button>
+        </form>
+
+        {% if warning %}
+            <div class="alert alert-warning">
+                {{ warning }}
+            </div>
+        {% endif %}
+
+        {% if result %}
+            <div class="alert alert-info">
+                {{ result }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
