@@ -54,7 +54,8 @@
             
             <div class="col-md-12 result-container">
                 {% if result_image %}
-                    <a href="{{ url_for('download') }}" class="btn btn-success mt-3">Download Image</a>
+            <!-- Change to use the correct endpoint 'bgremove.download' -->
+            <a href="{{ url_for('bgremove.download') }}" class="btn btn-success">Download</a>
                 {% endif %}
             </div>
         </div>

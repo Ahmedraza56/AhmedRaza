@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Blueprint
 import requests
 from bs4 import BeautifulSoup
 import urllib3
 
-WebScrapingTool = Flask(__name__)
+WebScrapingTool_app = Blueprint('WebScrapingTool', __name__)
 
 def simple_web_scraper(url, scrape_option):
     try:
@@ -43,7 +43,7 @@ def simple_web_scraper(url, scrape_option):
     except Exception as e:
         return [{'Error': f'An error occurred: {e}'}]
 
-@WebScrapingTool.route('/', methods=['GET', 'POST'])
+@WebScrapingTool_app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         website_url = request.form['website_url']
@@ -52,6 +52,3 @@ def index():
         return render_template('WebScrapingTool.html', result=result)
 
     return render_template('WebScrapingTool.html', result=[])
-
-if __name__ == '__main__':
-    WebScrapingTool.run(debug=True)

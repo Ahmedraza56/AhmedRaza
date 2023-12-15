@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Blueprint
 from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
 import torch
 
-textDetector = Flask(__name__)
+textDetector_app = Blueprint("textDetector", __name__)
 
 # Load pre-trained DistilBERT model and tokenizer
 tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
@@ -24,11 +24,11 @@ def check_text(text):
     else:
         return "This text appears to be AI-generated."
 
-@textDetector.route('/')
+@textDetector_app.route('/')
 def index():
     return render_template('textDetector.html')
 
-@textDetector.route('/', methods=['POST'])
+@textDetector_app.route('/', methods=['POST'])
 def process_text():
     user_input = request.form['user_input']
 
@@ -38,5 +38,3 @@ def process_text():
     else:
         return render_template('textDetector.html', warning="Please enter some text.")
 
-if __name__ == "__main__":
-    textDetector.run(debug=True)

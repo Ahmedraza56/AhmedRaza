@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, Blueprint
 from rembg import remove
 from PIL import Image
 import io
 
-bgremove = Flask(__name__)
+bgremove_app = Blueprint("bgremove", __name__)
 
-@bgremove.route('/', methods=['GET', 'POST'])
+@bgremove_app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         # Get the uploaded file
@@ -30,12 +30,7 @@ def index():
 
     return render_template('bgremove.html', result_image=None, error_message=None)
 
-
-
-@bgremove.route('/download')
+@bgremove_app.route('/download')
 def download():
     return send_file('static/bg_removed.png', as_attachment=True)
 
-
-if __name__ == '__main__':
-    bgremove.run(debug=True)

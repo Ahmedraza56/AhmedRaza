@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Blueprint
 from gtts import gTTS
 from io import BytesIO
 import base64
 
-app = Flask(__name__)
+text_to_speech_app = Blueprint("text_to_speech", __name__)
 
 # Function to convert text to speech
 def text_to_speech(text):
@@ -30,7 +30,7 @@ def get_audio_download_link(buffer, filename="audio.mp3"):
         return None
 
 # Index route
-@app.route('/', methods=['GET', 'POST'])
+@text_to_speech_app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         user_input_text = request.form.get('user_input_text')
@@ -51,5 +51,3 @@ def index():
     
     return render_template('text_to_speech.html', audio_link=None, error_message=None)
 
-if __name__ == '__main__':
-    app.run(debug=True)
