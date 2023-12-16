@@ -41,7 +41,7 @@ def simple_web_scraper(url, scrape_option):
             return [{'Error': f'Error: {response.status}'}]
 
     except Exception as e:
-        return [{'Error': f'An error occurred: {e}'}]
+        return [{'Error': f'This Site is Restricted: {e}'}]
 
 @WebScrapingTool_app.route('/', methods=['GET', 'POST'])
 def index():
