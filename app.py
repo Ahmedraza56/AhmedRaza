@@ -4,6 +4,7 @@ from text_to_speech import text_to_speech_app
 from textDetector import textDetector_app
 from WebScrapingTool import WebScrapingTool_app
 from webtopng import webtopng_app
+from mbtokb import mbtokb_app
 
 app = Flask(__name__)
 
@@ -16,6 +17,7 @@ app.register_blueprint(text_to_speech_app, url_prefix='/text_to_speech')
 app.register_blueprint(textDetector_app, url_prefix='/textDetector')
 app.register_blueprint(WebScrapingTool_app, url_prefix='/WebScrapingTool')
 app.register_blueprint(webtopng_app, url_prefix='/webtopng')
+app.register_blueprint(mbtokb_app, url_prefix='/mbtokb')    
 
 if __name__ == '__main__':
     app.run(port=8002,debug=True)
