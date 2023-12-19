@@ -45,7 +45,7 @@
            
         <div>
             {% if download_button_visible %}
-                <a href="/download" class="btn btn-success mt-3">Download Converted Image</a>
+           <a href="{{ url_for('mbtokb.download') }}" class="btn btn-success mt-3">Download Converted Image</a>
             {% endif %}
         </div>
         
