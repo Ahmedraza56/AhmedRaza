@@ -9,20 +9,23 @@ tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
 model = DistilBertForSequenceClassification.from_pretrained('distilbert-base-uncased')
 
 def check_text(text):
-    # Tokenize and convert to model input format
-    inputs = tokenizer(text, return_tensors='pt', truncation=True, padding=True)
+    try:
+        # Tokenize and convert to model input format
+        inputs = tokenizer(text, return_tensors='pt', truncation=True, padding=True)
 
-    # Make a prediction
-    outputs = model(**inputs)
+        # Make a prediction
+        outputs = model(**inputs)
 
-    # Get predicted label
-    prediction = torch.argmax(outputs.logits).item()
+        # Get predicted label
+        prediction = torch.argmax(outputs.logits).item()
 
-    # Analyze the prediction and classify as AI-generated or human-written
-    if prediction == 0:  # You may need to adjust this based on your model
-        return "This text is likely human-written."
-    else:
-        return "This text appears to be AI-generated."
+        # Analyze the prediction and classify as AI-generated or human-written
+        if prediction == 0:  # You may need to adjust this based on your model
+            return "This text is likely human-written."
+        else:
+            return "This text appears to be AI-generated."
+    except Exception as e:
+        return f"An error occurred: {str(e)}"
 
 @textDetector_app.route('/')
 def index():
@@ -37,4 +40,3 @@ def process_text():
         return render_template('textDetector.html', result=result, user_input=user_input)
     else:
         return render_template('textDetector.html', warning="Please enter some text.")
-
