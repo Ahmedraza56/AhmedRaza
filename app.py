@@ -5,9 +5,10 @@ from textDetector import textDetector_app
 from WebScrapingTool import WebScrapingTool_app
 from webtopng import webtopng_app
 from mbtokb import mbtokb_app
+from VideoAudioSplitter import VideoAudioSplitter_app
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 
+app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024 
 
 
 @app.route('/')
@@ -19,7 +20,8 @@ app.register_blueprint(text_to_speech_app, url_prefix='/text_to_speech')
 app.register_blueprint(textDetector_app, url_prefix='/textDetector')
 app.register_blueprint(WebScrapingTool_app, url_prefix='/WebScrapingTool')
 app.register_blueprint(webtopng_app, url_prefix='/webtopng')
-app.register_blueprint(mbtokb_app, url_prefix='/mbtokb')    
+app.register_blueprint(mbtokb_app, url_prefix='/mbtokb')  
+app.register_blueprint(VideoAudioSplitter_app, url_prefix='/VideoAudioSplitter')  
 
 if __name__ == '__main__':
     app.run(port=8002,debug=True)
