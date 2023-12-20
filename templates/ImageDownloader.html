@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Downloader</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+        background-color: #1054a8;
+        font-family:"Ubuntu",sans-serif;
+        justify-content: center;
+        align-items: center;
+        margin-top:15%;
+    }
+
+    .container {
+        width: 800px;
+        padding: 20px;
+        border: rounded shadow;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+        
+    }
+    h1{
+        color: #f5f5f5;
+        
+    }
+
+</style>
+<body>
+    <h1 class="text-center">Image Downloader</h1>
+
+<div class="container mt-5">
+    <form method="post" action="{{ url_for('ImageDownloader.index') }}">
+        <div class="form-group">
+            <label for="url">Enter the image URL</label>
+            <input type="text" class="form-control" id="url" name="url" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+        <!-- Add download button -->
+        {% if image %}
+            <a href="{{ url_for('ImageDownloader.download') }}" class="btn btn-success" download="downloaded_image.png">Download Image</a>
+        {% endif %}
+    </form>
+
+    {% if error_message %}
+        <div class="alert alert-danger mt-3">
+            {{ error_message }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
