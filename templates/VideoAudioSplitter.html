@@ -40,10 +40,10 @@
     </div>
   {% endif %}
 
-  <form method="post" enctype="multipart/form-data">
+  <form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
     <div class="form-group">
       <label for="file">Choose a video...</label>
-      <input type="file" class="form-control-file" id="file" name="file" accept=".mp4" size="30000000">
+      <input type="file" class="form-control-file" id="file" name="file" accept=".mp4">
     </div>
     <button type="submit" class="btn btn-primary">Process Video</button>
   </form>
@@ -56,6 +56,34 @@
   {% endif %}
 
 </div>
+<script>
+  function validateForm() {
+    var fileInput = document.getElementById('file');
+    
+    if (fileInput.files.length === 0) {
+      alert('Please select a file.');
+      return false;
+    }
+
+    var allowedExtensions = ['.mp4'];
+    var fileSizeLimit = 30 * 1024 * 1024; // 30MB
+
+    var fileName = fileInput.files[0].name;
+    var fileExtension = fileName.slice(((fileName.lastIndexOf(".") - 1) >>> 0) + 2);
+
+    if (!allowedExtensions.includes(fileExtension.toLowerCase())) {
+      alert('Invalid file type. Please select an MP4 file.');
+      return false;
+    }
+
+    if (fileInput.files[0].size > fileSizeLimit) {
+      alert('File size exceeds the limit of 30MB.');
+      return false;
+    }
+
+    return true;
+  }
+</script>
 
 </body>
 </html>
