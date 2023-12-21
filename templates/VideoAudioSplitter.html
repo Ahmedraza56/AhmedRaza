@@ -29,7 +29,6 @@
 
 </style>
 
-
 <body>
 <h1 class="mb-4 text-center">Video and Audio Splitter for Video Editors</h1>
 
@@ -41,12 +40,12 @@
     </div>
   {% endif %}
 
-  <form method="post" enctype="multipart/form-data" onsubmit="return validateFileSize()">
+  <form method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label for="file">Choose a video...</label>
-      <input type="file" class="form-control-file" id="file" name="file" accept=".mp4" onchange="validateFileSize(this)">
+<input type="file" class="form-control-file" id="file" name="file" accept=".mp4" size="30000000">
     </div>
-    <button type="submit" id="submitBtn" class="btn btn-primary" disabled>Process Video</button>
+    <button type="submit" class="btn btn-primary">Process Video</button>
   </form>
 
   {% if audio and video %}
@@ -57,24 +56,6 @@
   {% endif %}
 
 </div>
-
-<script>
-  function validateFileSize() {
-    var input = document.getElementById('file');
-    var fileSize = input.files[0].size; // in bytes
-    var maxSize = 30000000; // 30 MB
-
-    if (fileSize > maxSize) {
-      alert('File size exceeds the limit of 30 MB. Please choose a smaller file.');
-      input.value = ''; // Clear the file input
-      document.getElementById('submitBtn').disabled = true; // Disable the submit button
-      return false; // Prevent form submission
-    } else {
-      document.getElementById('submitBtn').disabled = false; // Enable the submit button
-      return true; // Allow form submission
-    }
-  }
-</script>
 
 </body>
 </html>
